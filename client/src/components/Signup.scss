@@ -1,0 +1,64 @@
+@import "../styles/variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.main-div {
+  width: 100%;
+}
+.signup-form {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  // border: red solid 2px;
+}
+.signup-div {
+  width: 200px;
+  height: 500px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  background-color: #292f3d;
+  box-shadow: -15px -15px 15px rgba(255, 255, 255, 0),
+    15px 15px 15px rgba(255, 255, 255, 0.3);
+}
+.input-signup {
+  margin: 2px;
+  border-radius: 2px;
+  outline: none;
+  padding: 3px;
+}
+a.button {
+  margin: 15px 40px 0 40px;
+  display: inline-block;
+  padding: 0, 35em 1.2em;
+  border: 0.1em solid #ffffff;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+a.button:hover {
+  background-color: #ffffff;
+  color: black;
+  border-color: #ffffff;
+}
+.to-login {
+  color: white;
+  font-size: 12px;
+  position: relative;
+  left: 34px;
+  margin-top: 3px;
+}
+.form-error {
+  color: red;
+  font-size: 10px;
+}

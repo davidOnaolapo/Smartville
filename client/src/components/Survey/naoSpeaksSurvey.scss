@@ -1,0 +1,112 @@
+@import "../../styles/variables.scss";
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.naoBox {
+    
+  &__speaking {
+    width: 200px;
+    height: 80px;
+    margin: 20px 10px 30px -14px;
+    background: transparent;
+    padding: 4px 4px 4px 10px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    font-family: "Baloo 2", cursive;
+    position: relative;
+
+    &-sb6:before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid grey;
+      border-top: 10px solid grey;
+      border-bottom: 10px solid transparent;
+      left: -21px;
+      top: 6px;
+    }
+
+    &-sb6:after {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 7px solid transparent;
+      border-right: 7px solid rgba(255, 255, 255, 0.616);
+      border-top: 7px solid rgba(255, 255, 255, 0.712);
+      border-bottom: 7px solid transparent;
+      left: -11px;
+      top: 10px;
+    }
+  
+    &-sb7:before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      left: 20px;
+      bottom: -23px;
+    }
+  
+    &-sb7:after {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid grey;
+      border-right: 10px solid transparent;
+      border-top: 10px solid grey;
+      border-bottom: 10px solid transparent;
+      left: 24px;
+      bottom: -13px;
+    } 
+  }
+
+  &__speakingError {
+    width: 200px;
+    height: 100px;
+    margin: -100px 10px 30px -100px;
+    background: transparent;
+    padding: 4px 8px 4px 10px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    font-family: "Baloo 2", cursive;
+    position: relative;
+  
+    &-sb8:before {
+      content: "";
+      width: 0px;
+      height: 100px;
+      position: absolute;
+      left: 20px;
+      bottom: -23px;
+    }
+  
+    &-sb8:after {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid 	#D0D0D0;
+      border-right: 10px solid transparent;
+      border-top: 10px solid 	#D0D0D0;
+      border-bottom: 10px solid transparent;
+      left: 24px;
+      bottom: -13px;
+    } 
+  }
+}
+ 
+
+
