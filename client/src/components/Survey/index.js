@@ -21,7 +21,8 @@ const ERROR_NO_BUDGET = "ERROR_NO_BUDGET";
 const ERROR_SERVER = "ERROR_SERVER";
 const ROOMS = "ROOMS";
 const PROVIDER = "PROVIDER";
-const LOADING = "LOADING"
+const LOADING = "LOADING";
+const BEGIN = "BEGIN"
 
 //style for the survey paper
 const useStyles = makeStyles((theme) => ({
@@ -42,10 +43,12 @@ export default function Survey (props) {
 	// const [profile, setProfile] = useState(false);
 
 	//call custom hook for controlling form rendering
-	const { mode, transition, back } = useVisualMode(BUDGET)
+	const { mode, transition, back } = useVisualMode(BEGIN)
 
 	const next = () => {
-		if(mode === BUDGET) {
+		if(mode === BEGIN) {
+			transition(BUDGET);
+		} else if(mode === BUDGET) {
 			transition(PROVIDER);
 		} else if(mode === PROVIDER) {
 			transition(ROOMS);
@@ -112,8 +115,17 @@ export default function Survey (props) {
 	return (
 		<div  className={classes.paper} style ={{marginLeft:'20px'}}>
       <div className="survey__card survey__card--create">
+				{/* Kick starts the survey */}
+				{ mode === "BEGIN"  && 
+					<section className="survey__card-nao_ask">
+						<img src="images/nao_normal.png" alt="nao" className="survey__card-img"/>
+						<div className="naoBox__speaking naoBox__speaking-sb6">
+							{naoSurveyQuestions(mode)}
+						</div>
+					</section>
+				}
 				{/* Dont load nao top pic ic its loading or displaying an error message */}
-				{ (mode!== "LOADING" && mode!= "ERROR_NO_BUDGET") && 
+				{ (mode!== "LOADING" && mode!= "ERROR_NO_BUDGET" && mode !== "BEGIN") && 
 					<section className="survey__card-nao_ask">
 						<img src="images/nao_ask.png" alt="nao" className="survey__card-img"/>
 						<div className="naoBox__speaking naoBox__speaking-sb6">
@@ -125,12 +137,12 @@ export default function Survey (props) {
 					<Form save={save} mode={mode} backToStart={backToStart}/>
 				</section>			
     		<section className="survey__actions">
-					{(mode !== "BUDGET" && mode !== "LOADING" && mode != "ERROR_NO_BUDGET") &&
+					{(mode !== "BUDGET" && mode !== "LOADING" && mode != "ERROR_NO_BUDGET" &&  mode != "BEGIN") &&
 						<Button className = "survey__actions-button" variant="contained" color="default" onClick={goBack}>
 							<ArrowBackIosIcon style={{fontSize:'small'}}/> Back 
       			</Button> 
 					}
-					{(mode === "BUDGET") &&
+					{(mode === "BUDGET" || mode === "BEGIN") &&
 						<Button className = "survey__actions-button" variant="contained" disabled>
 							<ArrowBackIosIcon style={{fontSize:'small'}}/> Back 
       			</Button> 

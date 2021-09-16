@@ -53,7 +53,7 @@ export default function Form(props) {
     speakers: false,
     hubs: false,
     appliances: false,
-    thermostat: false,
+    thermostat: false, 
     security: false,
     garage: false,
   });  
