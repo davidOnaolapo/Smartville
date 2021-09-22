@@ -117,8 +117,8 @@ export default function Survey (props) {
       <div className="survey__card survey__card--create">
 				{/* Kick starts the survey */}
 				{ mode === "BEGIN"  && 
-					<section className="survey__card-nao_ask">
-						<img src="images/nao_normal.png" alt="nao" className="survey__card-img"/>
+					<section className="survey__card-nao_begin">
+						<img src="images/nao_normal.png" alt="nao" className="survey__card-img" style ={{height:'18em'}}/>
 						<div className="naoBox__speaking naoBox__speaking-sb6">
 							{naoSurveyQuestions(mode)}
 						</div>
