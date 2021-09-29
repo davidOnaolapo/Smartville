@@ -1,4 +1,8 @@
 const naoSurveyQuestions = (mode) => {
+  if (mode === "BEGIN") {
+    return "Lets begin to set up your smart home!"
+  }
+
   if (mode === "BUDGET") {
     return "How much are you looking to spend?"
   }
