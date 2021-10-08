@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import axios from 'axios';
-import useVisualMode from "./useVisualMode"
 
 import { checkForUser } from "../helpers/dataOrganisers"
 import { removeProductFromRecs } from "../helpers/selectors"

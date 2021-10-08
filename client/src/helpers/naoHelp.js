@@ -18,6 +18,7 @@ const naoSurveyQuestions = (mode) => {
   if(mode === "CATEGORIES") {
     return "What types of products are you looking for?"
   }
+  
   if(mode === "ERROR_NO_BUDGET") {
     return "Unfortunately, your budget does not match your selected needs. Please try again"
   }

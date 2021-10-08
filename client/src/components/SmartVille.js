@@ -1,12 +1,14 @@
 import React from "react"
 import {useState} from "react";
 
-import HouseIcon from '@material-ui/icons/House';
 import transitions from "@material-ui/core/styles/transitions";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import { makeStyles } from '@material-ui/core/styles';
  
 import { naoGettingStarted } from "../helpers/naoHelp"
+import useVisualMode from "../hooks/useVisualMode"
 
 import "./SmartVille.scss";
 import "./naoSpeaksSmartville.scss"
@@ -39,11 +41,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SmartVille(props) {
   const classes = useStyles();
+  //for Nao sidebar
   const { transitionNao, modeNao } = props;
  
-  const [modeGS, transitionModeGS] = useState(GETSTARTED);
+  // for Nao mainpage
+	const { mode, transition, back } = useVisualMode(GETSTARTED)
 
-  const naoTalking = naoGettingStarted(modeGS)
+  const naoTalking = naoGettingStarted(mode)
 
   
   if(modeNao === "LOGOUT"){
@@ -52,14 +56,13 @@ export default function SmartVille(props) {
     transitionNao(WELCOME)
   }
 
-  const handleModeGS = (event) => {
-    console.log("ABOUTA HANDLE MODE")
-    if(modeGS === "GETSTARTED") {
-      transitionModeGS (GENERAL);
+  const handleNextGS = (event) => {
+    if(mode === "GETSTARTED") {
+      transition(GENERAL);
     }
 
-    if(modeGS === "GENERAL") {
-      transitionModeGS (MAJOR);
+    if(mode === "GENERAL") {
+      transition(MAJOR);
     }
   }
   
@@ -76,11 +79,12 @@ export default function SmartVille(props) {
                   {naoTalking.heSays[0]}
               </div>
             
-            <div style={{ display:"flex", justifyContent:"flex-end" }}>
-              <ArrowForwardIcon className={classes.arrow} onClick={handleModeGS}/>
+            <div style={{ display:"flex", justifyContent:"space-between" }}>
+              <ArrowBackIcon className={classes.arrow} onClick={back()}/>
+              <ArrowForwardIcon className={classes.arrow} onClick={handleNextGS}/>   
             </div>
           </div>
-          <div className= {modeGS === MAJOR ? classes.googleImages : classes.none}>
+          <div className= {mode === MAJOR ? classes.googleImages : classes.none}>
             <img src="images/googleHomeExample.png" style={{margin:"5px"}}/>
             <img src="images/googleHomeExample2.png"  style={{margin:"5px 5px 23px 5px"}} /></div>
         </div>
