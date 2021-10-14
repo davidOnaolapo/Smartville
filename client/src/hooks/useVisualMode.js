@@ -10,6 +10,7 @@ export default function useVisualMode (initialMode) {
     }
     setHistory(prevHistory => [...prevHistory, newMode])
     setMode(newMode);
+    console.log("USEVISUAL", mode, newMode)
     return;   
   }
 

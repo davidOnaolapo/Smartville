@@ -45,7 +45,39 @@ export default function SmartVille(props) {
   const { transitionNao, modeNao } = props;
  
   // for Nao mainpage
-	const { mode, transition, back } = useVisualMode(GETSTARTED)
+	// const { mode, transition, back } = useVisualMode(GETSTARTED          )
+
+  const [mode, setMode] = useState(GETSTARTED);
+  const [history, setHistory] = useState([GETSTARTED]); // This line is new!
+
+  const transition = (newMode, replace) => { 
+    if(replace) {
+      popHistory()
+    }
+    setHistory(prevHistory => [...prevHistory, newMode])
+    setMode(newMode);
+    console.log("USEVISUAL", mode, newMode)
+    return;   
+  }
+
+  const back = () => {  
+    const historyLength = history.length
+
+    if (historyLength > 1) {
+      setMode(history[historyLength - 2]);
+      popHistory();      
+    }      
+    return 
+  }
+
+  const popHistory = () => {
+    const historyLength = history.length
+
+    const newHistory = history.filter((_, i) => i !== historyLength - 1);
+    setHistory(newHistory);
+
+    return;
+  }
 
   const naoTalking = naoGettingStarted(mode)
 
@@ -57,15 +89,13 @@ export default function SmartVille(props) {
   }
 
   const handleNextGS = (event) => {
-    if(mode === "GETSTARTED") {
+    if(mode === GETSTARTED) {
       transition(GENERAL);
-    }
-
-    if(mode === "GENERAL") {
+    } else if(mode === GENERAL) {
       transition(MAJOR);
     }
   }
-  
+  console.log("SV",mode)
   return (
     <div style={{width:"100%", display:"flex",flexDirection:"column"  }}>
     <div style={{display:"flex",flexDirection:"column"}}>
