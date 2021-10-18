@@ -1,4 +1,4 @@
-const setupCategories = (categories, quantities) => {
+export const setupCategories = (categories, quantities) => {
   const categoryObj = {};
 
   const categoryKeys = Object.keys(categories);
@@ -15,7 +15,7 @@ const setupCategories = (categories, quantities) => {
   return categoryObj
 }
 
-const setUpRooms = (rooms) => {
+export const setUpRooms = (rooms) => {
   const roomKeys = Object.keys(rooms);
   const roomVars = roomKeys.filter(x => (rooms[x] === true));
 
@@ -43,11 +43,11 @@ const setUpRooms = (rooms) => {
   return newRooms;
 }
 
-const checkForUser = () => {
+export const checkForUser = () => {
   return JSON.parse(localStorage.getItem("user_token"));
 }
 
-const formDataForSurvey = (budget, provider, categories, rooms, user) => {
+export const formDataForSurvey = (budget, provider, categories, rooms, user) => {
   const apiObj = {}
 
   apiObj.budget = Number(budget);
@@ -59,21 +59,13 @@ const formDataForSurvey = (budget, provider, categories, rooms, user) => {
   return apiObj;
 }
 
-const formDataForHome = (product_id, user) => {
+export const formDataForHome = (product_id, user) => {
   const apiObj = {};
 
   apiObj.user = user;
   apiObj.product_id = product_id;
 
   return apiObj;
-}
-
-module.exports = {
-  setupCategories,
-  setUpRooms,
-  formDataForSurvey,
-  formDataForHome,
-  checkForUser
 }
 
 

@@ -10,7 +10,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import "./index.scss";
 import "./naoSpeaksSurvey.scss";
 
-import Form from "./Form.js"
+import Form from "./Form.jsx"
 import { naoSurveyQuestions } from "../../helpers/naoHelp"
 import useVisualMode from "../../hooks/useVisualMode"
 

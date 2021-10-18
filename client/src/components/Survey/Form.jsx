@@ -10,7 +10,7 @@ import Rooms from './Rooms';
 import Categories from './Categories';
 import Loading from './Loading';
 import Error from './Error';
-import dataOrganisers from '../../helpers/dataOrganisers'
+import { setupCategories, setUpRooms, formDataForSurvey, checkForUser }  from '../../helpers/dataOrganisers'
 
 import transitions from '@material-ui/core/styles/transitions';
 
@@ -33,7 +33,7 @@ export default function Form(props) {
   const classes = useStyles();
   
   const { save, mode, backToStart } = props;
-  const { setupCategories, setUpRooms, formDataForSurvey, checkForUser } = dataOrganisers
+  // const { setupCategories, setUpRooms, formDataForSurvey, checkForUser } = dataOrganisers
 
   //hooks for tracking the state of each survey question response
   const [budget, setBudget] = useState("");

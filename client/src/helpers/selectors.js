@@ -1,4 +1,4 @@
-const organiseSurvey = (survey, hasProductInStore) => {
+export const organiseSurvey = (survey, hasProductInStore) => {
   const surveyRooms = []
 
   for (let roomX of survey[0].rooms) {
@@ -24,7 +24,7 @@ const organiseSurvey = (survey, hasProductInStore) => {
   return surveyRooms
 }
 
-const nameForRoom = (room) => {
+export const nameForRoom = (room) => {
   if(room.id === 4){
     return 'Living Room'
   }
@@ -62,7 +62,7 @@ const nameForRoom = (room) => {
   }
 }
 
-const avatarForRoom = (room) => {
+export const avatarForRoom = (room) => {
   
     if(room.id === 4){
       return '🛋️'
@@ -101,7 +101,7 @@ const avatarForRoom = (room) => {
     }
 }
 
-const avatarForProduct = (product) => {
+export const avatarForProduct = (product) => {
     if(product.category_id === 2 || product.category_id === 3){
       return '💡'
     }
@@ -136,7 +136,7 @@ const avatarForProduct = (product) => {
   
 }
 
-const findStoresForProduct = (product, hasProductStore) => {
+export const findStoresForProduct = (product, hasProductStore) => {
   const storesForProduct = []
 
   for(let findProduct of hasProductStore ) {
@@ -157,7 +157,7 @@ const findStoresForProduct = (product, hasProductStore) => {
   return storesForProduct;
 }
 
-const nameForStore = (findProduct) =>{
+export const nameForStore = (findProduct) =>{
   if(findProduct.store_id === 1){
     return "Walmart"
   }
@@ -171,30 +171,21 @@ const nameForStore = (findProduct) =>{
   }
 }
 
-const checkRoomPresent = (rooms, id) => {
+export const checkRoomPresent = (rooms, id) => {
 
   console.log("ROOMS, ID", rooms, id)
   const roomPresent = rooms.filter(x => x.id === id); 
   return roomPresent.length
 }
 
-const getNewCostForRoom = (rooms, id) => {
+export const getNewCostForRoom = (rooms, id) => {
   return rooms.filter(x => x.id === id)[0].cost   
 }
 
-const removeProductFromRecs = (recs, productId) => {
+export const removeProductFromRecs = (recs, productId) => {
   console.log("****PRODUCT ID****", productId)
   return recs.map((rec) => {
     const products = rec.products.filter(p => p.id !== productId)
     return { ...rec, products }
   })
-}
-
-
-module.exports = {
-  organiseSurvey,
-  avatarForProduct,
-  checkRoomPresent,
-  getNewCostForRoom,
-  removeProductFromRecs
 }

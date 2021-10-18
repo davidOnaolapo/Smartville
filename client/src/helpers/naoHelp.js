@@ -1,4 +1,4 @@
-const naoSurveyQuestions = (mode) => {
+export const naoSurveyQuestions = (mode) => {
   if (mode === "BEGIN") {
     return "Lets begin to set up your smart home!"
   }
@@ -24,7 +24,7 @@ const naoSurveyQuestions = (mode) => {
   }
 }
 
-const naoSidebar = (mode) => {
+export const naoSidebar = (mode) => {
   if(mode === "WELCOME") {
     const naoSpeaksObj = { heSays: ["Take the survey to start setting up your smart home"],
       img:"images/nao_peace.png" }
@@ -95,7 +95,7 @@ const naoSidebar = (mode) => {
   }
 }
 
-const naoGettingStarted = (mode) => {
+export const naoGettingStarted = (mode) => {
   if(mode === "GETSTARTED") {
     const naoSpeaksObj = { heSays:["Hi there! My name is Nao, and i'll be your guide through Smartville"], 
       img:"images/nao_normal.png" }
@@ -113,10 +113,4 @@ const naoGettingStarted = (mode) => {
       img:"images/nao_normal.png" }
     return naoSpeaksObj
   }
-}
-
-module.exports = {
-  naoSurveyQuestions,
-  naoSidebar,
-  naoGettingStarted
 }
