@@ -38,7 +38,7 @@ export default function Form(props) {
   //hooks for tracking the state of each survey question response
   const [budget, setBudget] = useState("");
   const [provider, setProvider] = useState("");
-  const [rooms, setRooms] = useState({
+  const [rooms, setRooms] = useState({ 
     livingRoom: false,
     kitchen: false,
     bathRoom: false,
