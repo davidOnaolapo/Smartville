@@ -97,7 +97,7 @@ export const naoSidebar = (mode) => {
 
 export const naoGettingStarted = (mode) => {
   if(mode === "GETSTARTED") {
-    const naoSpeaksObj = { heSays:["Hi there! My name is Nao, and i will be your guide through Smartville"], 
+    const naoSpeaksObj = { heSays:["Hi there! My name is Nao, and I will be your guide through Smartville"], 
       img:"images/nao_normal.png" }
     return naoSpeaksObj
   }
