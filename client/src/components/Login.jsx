@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./Login.scss";
 import axios from "axios";
 import * as yup from "yup";
+import { API_URL } from "../constants"
 
 const emailError = ["Must be valid email", "Email is required"];
 const passwordError = [
@@ -56,7 +57,7 @@ export default function Login(props) {
 		setServerError("")
       	setFormErrors({});
 
-      const signupPost = await axios.post("http://localhost:3002/login", data)
+      const signupPost = await axios.post(`${API_URL}/login`, data)
       console.log("======", signupPost.data.user);
 	    localStorage.setItem("user_token", JSON.stringify({token: signupPost.data.token}))
       localStorage.setItem("user_name", signupPost.data.user);

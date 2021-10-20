@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { checkForUser } from "../helpers/dataOrganisers"
 import { removeProductFromRecs } from "../helpers/selectors"
+import { API_URL } from "../constants"
 
 const LOADING = "LOADING"
 
@@ -20,9 +21,9 @@ export default function useApplicationData () {
   useEffect(() => {
     //Load all the data from the database when the page loads
     Promise.all([
-      axios.get('http://localhost:3002/products'),
-      axios.get('http://localhost:3002/rooms'),
-      axios.get('http://localhost:3002/productInStore')
+      axios.get(`${API_URL}/products`),
+      axios.get(`${API_URL}/rooms`),
+      axios.get(`${API_URL}/productInStore`)
 
     ]).then((all) => {
       setProducts(all[0].data);
@@ -35,7 +36,7 @@ export default function useApplicationData () {
   useEffect(() => {
     //Load Recommendations
     if (checkForUser()) {
-      axios.post('http://localhost:3002/grabResults', checkForUser())
+      axios.post(`${API_URL}/grabResults`, checkForUser())
         .then((res) => {
           console.log("GRABBING RESULTS YO", res)
           setRec(res.data)
@@ -59,7 +60,7 @@ export default function useApplicationData () {
 
     // send data to the backend
     return new Promise((resolve, reject) => {
-      axios.post("http://localhost:3002/surveyData", surveyData)
+      axios.post(`${API_URL}/surveyData`, surveyData)
       .then((res) => {
         // const survey = {
         // }
@@ -84,7 +85,7 @@ export default function useApplicationData () {
 
     // send data to the backend
     return new Promise((resolve, reject) => {
-      axios.post("http://localhost:3002/surveyDataAnon", surveyDataAnon)
+      axios.post(`${API_URL}/surveyDataAnon`, surveyDataAnon)
       .then((res) => {
         // const survey = {
         // }
@@ -107,7 +108,7 @@ export default function useApplicationData () {
   const gotProductHome = (addProdData) => {
     console.log("IN GET PRODUCT HOME")
     return new Promise((resolve, reject) => {
-      axios.post("http://localhost:3002/addProductHome", addProdData)
+      axios.post(`${API_URL}/addProductHome`, addProdData)
       .then((res) => {
         console.log("GOT BACK A MESSAGE GOT PROD IN HOME")
         return resolve(console.log(res));
@@ -122,7 +123,7 @@ export default function useApplicationData () {
     console.log("IN REMOVE PRODUCT HOME")
 
     return new Promise((resolve, reject) => {
-      axios.post("http://localhost:3002/deleteProductHome", removeProdData)
+      axios.post(`${API_URL}/deleteProductHome`, removeProdData)
       .then((res) => {
         console.log("GOT BACK A MESSAGE REMOVE PROD FROM HOME")
         return resolve(console.log(res));
@@ -136,7 +137,7 @@ export default function useApplicationData () {
   const deleteRecommendation = (removeRecData) => {
     console.log("****TO BE DELETED ***", removeRecData);
     return new Promise((resolve, reject) => {
-      axios.post("http://localhost:3002/removeRecommendation", removeRecData)
+      axios.post(`${API_URL}/removeRecommendation`, removeRecData)
       .then((res) => {
         console.log("SUCCESSFUL DELETE") 
         setRec(recs => removeProductFromRecs(recs, removeRecData.product_id)); 
