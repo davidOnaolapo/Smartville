@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
   //   res.send('unique string')
   // })
   // console.log('test string')
-  res.send("HI, FOR GCPP AGAIN")
+  res.send("HI, FOR GCPP MANUAL")
 })
 
 
