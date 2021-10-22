@@ -62,8 +62,6 @@ app.get('/', (req, res) => {
     console.log('#@#@', data.rows[0])
     res.send(data.rows[0])
   })
-  console.log('test string')
-  res.send("HI, FOR GCPP POST DB")
 })
 
 
