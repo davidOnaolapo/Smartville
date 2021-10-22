@@ -7,18 +7,18 @@ const ENV = process.env.ENV || "development";
 console.log(process.env.DB_HOST);
 
 // PG database client / connection setup
-// const { Pool } = require('pg');
-// const dbParams = require('./lib/db.js');
-// const db = new Pool(dbParams);
-// db.connect()
-//   .then(data => {
-//     console.log("Successfully Connected to DB")
-//   })
-//   .catch(err => {
-//     console.error(err)
-//   })
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect()
+  .then(data => {
+    console.log("Successfully Connected to DB")
+  })
+  .catch(err => {
+    console.error(err)
+  })
 
-// module.exports = { db }
+module.exports = { db }
 
 const app = express();
 app.use(cors()) // CORS middleware useage
@@ -57,12 +57,12 @@ app.use("/signup", signup(db));
 app.use("/login", login(db))
 
 app.get('/', (req, res) => {
-  // db.query(`SELECT * FROM PRODUCTS;`)
-  // .then(data => {
-  //   console.log('#@#@', data.rows[0])
-  //   res.send(data.rows[0])
-  // })
-  // console.log('test string')
+  db.query(`SELECT * FROM PRODUCTS;`)
+  .then(data => {
+    console.log('#@#@', data.rows[0])
+    res.send(data.rows[0])
+  })
+  console.log('test string')
   res.send("HI, FOR GCPP POST DB")
 })
 
