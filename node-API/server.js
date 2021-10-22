@@ -57,13 +57,13 @@ app.use("/signup", signup(db));
 app.use("/login", login(db))
 
 app.get('/', (req, res) => {
-  db.query(`SELECT * FROM PRODUCTS;`)
-  .then(data => {
-    console.log('#@#@', data.rows[0])
-    res.send(data.rows[0])
-  })
-  console.log('test string')
-  // res.send("HI, FOR GCPP MANUAL")
+  // db.query(`SELECT * FROM PRODUCTS;`)
+  // .then(data => {
+  //   console.log('#@#@', data.rows[0])
+  //   res.send(data.rows[0])
+  // })
+  // console.log('test string')
+  res.send("HI, FOR GCPP POST DB")
 })
 
 

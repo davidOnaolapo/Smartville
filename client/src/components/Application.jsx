@@ -161,7 +161,7 @@ export default function Application(props) {
           </AppBar>
 
           <main className="layout">
-            <section className="sidebar">
+            <section className="sidebar" style={{zoom:"90%"}}>
               <Sidebar modeNao={modeNao}/>
             </section>
             <Switch>
