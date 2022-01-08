@@ -18,6 +18,8 @@ export default function useApplicationData () {
   const [isloggedin, setloggedin] = useState(null);
   const [ modeNao, transitionNao ] = useState(LOADING)
 
+  const yes = "no"
+
   useEffect(() => {
     //Load all the data from the database when the page loads
     Promise.all([
