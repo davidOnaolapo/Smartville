@@ -18,7 +18,7 @@ db.connect()
     console.error(err)
   })
 
-module.exports = { db }
+module.exports = { db };
 
 const app = express();
 app.use(cors()) // CORS middleware useage
