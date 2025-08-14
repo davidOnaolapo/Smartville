@@ -1,38 +1,34 @@
 import React, { useState } from "react";
-import classNames from "classnames/bind";
-import { makeStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    width: 350,
-    margin: "10px 5px 10px 18px",
-    borderRadius: "10px",
-    boxShadow: "-15px -15px 15px rgba(255, 255, 255, 0), 15px 15px 15px rgba(255,255,255,0.3)",
+const StyledCard = styled(Card)({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  width: 350,
+  margin: "10px 5px 10px 18px",
+  borderRadius: "10px",
+  boxShadow: "-15px -15px 15px rgba(255, 255, 255, 0), 15px 15px 15px rgba(255,255,255,0.3)",
+});
 
-  },
-  media: {
-    backgroundSize: "contain",
-    height: 220,
-  },
-  noneVisible: {
-    visibility: "hidden",
-  }
+const StyledCardMedia = styled(CardMedia)({
+  backgroundSize: "contain",
+  height: 220,
+});
 
+const StyledHiddenDiv = styled('div')({
+  visibility: "hidden",
 });
 
 export default function ProductListItem(props) {
-  const classes = useStyles();
   const [show, setShow] = useState(true);
   const {
     product_name,
@@ -50,11 +46,10 @@ export default function ProductListItem(props) {
   }
   return (
     <>
-      <Card className={classes.root}>
+      <StyledCard>
         <CardActionArea>
-          <div className={classes.noneVisible}>displaynone</div>
-          <CardMedia
-            className={classes.media}
+          <StyledHiddenDiv>displaynone</StyledHiddenDiv>
+          <StyledCardMedia
             image={product_image}
             alt="product image"
             title="Contemplative Reptile"
@@ -64,7 +59,6 @@ export default function ProductListItem(props) {
               gutterBottom
               variant="h5"
               component="h2"
-              className={classes.test}
             >
               {product_name}
             </Typography>
@@ -84,7 +78,7 @@ export default function ProductListItem(props) {
             {`$${product_price / 100}`}
           </Button>
         </CardActions>
-      </Card>
+      </StyledCard>
     </>
   );
 }

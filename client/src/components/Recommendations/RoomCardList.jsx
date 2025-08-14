@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@mui/material';
 
 import RoomCard from "./RoomCard";
 import AppContext from "../../hooks/appContext";

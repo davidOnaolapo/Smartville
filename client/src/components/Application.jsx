@@ -1,16 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Switch,Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import HouseIcon from '@material-ui/icons/House';
+import { styled } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+import HouseIcon from '@mui/icons-material/House';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { createTheme , createMuiTheme, ThemeProvider } from "@material-ui/core";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Modal from "@material-ui/core/Modal";
-import Button from '@material-ui/core/Button';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { createTheme, ThemeProvider } from "@mui/material";
+import CssBaseline from '@mui/material/CssBaseline';
+import Modal from "@mui/material/Modal";
+import Button from '@mui/material/Button';
 
 
 import "./Application.scss";
@@ -32,70 +32,56 @@ import Sidebar from "./Sidebar/Sidebar"
 
 
 import ProductList from "./ProductList"
-import transitions from "@material-ui/core/styles/transitions";
+import { transitions } from "@mui/material/styles";
 
 //Declare material ui styling here
-const useStyles = makeStyles((theme) => ({
-  '@global':{
-    main:{
-      backgroundColor:"#001029",
-      color:'#f5f5f5'
-    }
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: '#001029',
+  display: 'flex',
+  alignItems: "flex-end",
+  '@media print': {
+    display: 'none',
   },
-  appBar: {
-    backgroundColor: '#001029',
-    display:'flex',
-    alignItems:"flex-end",
-    '@media print' : {
-      display: 'none',
-},
-  },
-  paper: {
-    position: "absolute",
-    width: 400,
-    backgroundColor: "purple",
-    border: "2px light #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  },
+}));
 
-  modal: {
-    display:'flex',
-    marginTop:'120px',
-    justifyContent:'center'
-  },
+const StyledButton = styled(Button)(({ theme }) => ({
+  color: "#fff",
+  backgroundColor: "#76BED0",
+  fontFamily: "system-ui",
+  fontSize: "14px"
+}));
 
-  button: {
-    color:"#fff",
-    backgroundColor:"#76BED0",
-    fontFamily:"system-ui",
-    fontSize:"14px"
-  },
+const StyledModal = styled(Modal)(({ theme }) => ({
+  display: 'flex',
+  marginTop: '120px',
+  justifyContent: 'center'
+}));
 
-  navBar: {
-    display:"flex",
-    justifyContent: "space-between"
-  },
-  userNav: {
-    display:"flex",
-  },
-  profilePic: {
-  },
-  loginLogout: {
-  }
+const StyledUserNav = styled('div')(({ theme }) => ({
+  display: "flex",
 }));
 
 export default function Application(props) {
-  const classes = useStyles();
-
   // material ui theme
   const theme = createTheme({
     palette: {
       background: {
-        main: 'white',
+        main: '#ffffff',
       },
-    }
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          main: {
+            backgroundColor: "#001029",
+            color: '#f5f5f5'
+          },
+        },
+      },
+    },
   });
+
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -134,7 +120,7 @@ export default function Application(props) {
       <AppContext.Provider value={{ deleteRecommendation, removeProductHome, gotProductHome, hasProductStore }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <AppBar position="static" className={classes.appBar}>
+          <StyledAppBar position="static">
             <Toolbar style={{display:"flex", justifyContent: "space-between", width:"100%" }}>
               <img  className="sidebar__imgLogo" src="images/smartVilleLogo.png" alt="smartvilleLogo"/>
               <div style={{display:"flex"}}>
@@ -142,10 +128,10 @@ export default function Application(props) {
                 <HouseIcon  style={{marginTop:"5px", fontSize:"30px", fontStyle:"italic"}}/>
                 <h1 style={{ fontFamily:"system-ui", fontStyle:"italic", marginLeft:"-2px"}}>RTVILLE</h1>
               </div>
-              <Button className={classes.button} variant="outlined" color="primary" onClick={handleSurveyOpen}>
+              <StyledButton variant="outlined" color="primary" onClick={handleSurveyOpen}>
                 TAKE SURVEY
-              </Button>
-              <div classNames= {classes.userNav} style={{display:"flex", justifyContent: "space-between", fontFamily:"system-ui" }}>
+              </StyledButton>
+              <StyledUserNav style={{justifyContent: "space-between", fontFamily:"system-ui" }}>
                 <Logout setuserName={setUsername} userName={username}
                   isloggedin={isloggedin} setIsloggedin={setloggedin}
                   transitionNao={transitionNao}  style={{fontFamily:"system-ui", fontWeight:500, marginRight:"20px" }}
@@ -153,43 +139,37 @@ export default function Application(props) {
                 <div style={{marginLeft:"30px"}}>
                   {isloggedin? <Avatar src="images/profilePic.jpg" alt="Lit"/>: null}
                 </div>
-              </div>
-              <Modal open={open} onClose={handleSurveyClose} className={classes.modal}>
+              </StyledUserNav>
+              <StyledModal open={open} onClose={handleSurveyClose}>
                 <Survey submitSurveyAnon={submitSurveyAnon} submitSurveyUser={submitSurveyUser} handleSurveyClose={handleSurveyClose} />
-              </Modal>
+              </StyledModal>
             </Toolbar>
-          </AppBar>
+          </StyledAppBar>
 
           <main className="layout">
             <section className="sidebar" style={{zoom:"90%"}}>
               <Sidebar modeNao={modeNao}/>
             </section>
-            <Switch>
-              <Route exact path='/'>
-                <SmartVille transitionNao={transitionNao} modeNao={modeNao}/>
-              </Route>
-              <Route path='/products'>
+            <Routes>
+              <Route exact path='/' element={<SmartVille transitionNao={transitionNao} modeNao={modeNao}/>} />
+              <Route path='/products' element={
                 <div>
                   <ProductList products={products} transitionNao={transitionNao}/>
                 </div>
-              </Route>
-              <Route path='/login'>
-                <Login setUser={setUsername} setIsloggedin={setloggedin} transitionNao={transitionNao} />
-              </Route>
-              <Route path='/signup'>
-                <Signup setUser={setUsername} setIsloggedin={setloggedin} transitionNao={transitionNao}/>
-              </Route>
-              <Route path='/profile'>
+              } />
+              <Route path='/login' element={<Login setUser={setUsername} setIsloggedin={setloggedin} transitionNao={transitionNao} />} />
+              <Route path='/signup' element={<Signup setUser={setUsername} setIsloggedin={setloggedin} transitionNao={transitionNao}/>} />
+              <Route path='/profile' element={
                 <div className="rooms">
                   <RoomCardList survey ={recommendations} transitionNao={transitionNao}/>
                 </div>
-              </Route>
-              <Route path='/notLoggedIn'>
+              } />
+              <Route path='/notLoggedIn' element={
                 <div className="rooms">
                   <NotLoggedIn recommendationsAnon={recommendationsAnon} transitionNao={transitionNao}/>
                 </div>
-              </Route>
-            </Switch>
+              } />
+            </Routes>
           </main>
         </ThemeProvider>
       </AppContext.Provider>

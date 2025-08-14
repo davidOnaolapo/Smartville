@@ -1,4 +1,4 @@
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./Login.scss";
 import axios from "axios";
@@ -73,7 +73,7 @@ export default function Login(props) {
 
 
   if (signedup) {
-    return <Redirect to="/" />
+    return <Navigate to="/" />
 }
   transitionNao(LOGIN)
   return (

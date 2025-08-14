@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@mui/material';
 
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import Avatar from '@mui/material/Avatar';
 
 import AppContext from "../../hooks/appContext";
 
@@ -15,41 +15,38 @@ import { avatarForProduct, checkRoomPresent, getNewCostForRoom } from "../../hel
 
 //modes for deletion of recitem
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    backgroundColor: '#292F3D',
-    margin:'20px',
-    borderRadius:'5px',
-    color: 'white',
-    display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap",
-  },
-  notPresent: {
-    display:"none"
-  },
-  avatar: {
-    backgroundColor: '#292F3D',
-    marginBottom:"3px",
-    fontSize:"1.4em"
-  },
-  cardHeader: {
-    fontSize:'18px',
-    marginLeft: '-16px',
-    fontWeight:600,
-    fontFamily:'cursive'
-  },
-  displayRec:{
-    margin:"-18px 0px 0px -18px",
-    display:"flex",
-    flexWrap: "wrap"
-  }
+const StyledCard = styled(Card)(({ theme }) => ({
+  width: '100%',
+  backgroundColor: '#292F3D',
+  margin: '20px',
+  borderRadius: '5px',
+  color: 'white',
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "wrap",
+}));
+
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  fontSize: '18px',
+  marginLeft: '-16px',
+  fontWeight: 600,
+  fontFamily: 'cursive'
+}));
+
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  backgroundColor: '#292F3D',
+  marginBottom: "3px",
+  fontSize: "1.4em"
+}));
+
+const StyledDisplayRec = styled('div')(({ theme }) => ({
+  margin: "-18px 0px 0px -18px",
+  display: "flex",
+  flexWrap: "wrap"
 }));
 
 export default function RoomCard(props) {
   const { id, products, name, avatar, cost } = props;
-  const classes = useStyles();
 
   const [roomPresent, setRoomPresent] = useState(true);
 
@@ -105,26 +102,21 @@ export default function RoomCard(props) {
   }
 
   return (
-    <Card className={ roomPresent ? classes.root : classes.notPresent }>
+    <StyledCard style={{ display: roomPresent ? 'flex' : 'none' }}>
       <div className="rec__card-top">
-        <CardHeader
-
+        <StyledCardHeader
           title={name}
-          classes={{
-            title: classes.cardHeader,
-            avatar: classes.avatar,
-          }}
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
+            <StyledAvatar aria-label="recipe">
               {avatar}
-            </Avatar>
+            </StyledAvatar>
           }
         />
         <div className="rec__card-priceText">
           ${ cost/100 }
         </div>
       </div>
-      <CardContent className={classes.displayRec}>
+      <StyledDisplayRec>
         {
           products.map((product) => {
             return <RecListItem
@@ -143,7 +135,7 @@ export default function RoomCard(props) {
             />
           })
         }
-      </CardContent>
-    </Card>
+      </StyledDisplayRec>
+    </StyledCard>
   );
 }

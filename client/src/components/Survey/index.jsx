@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { styled } from '@mui/material';
+import Button from '@mui/material/Button';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import "./index.scss";
 import "./naoSpeaksSurvey.scss";
@@ -25,7 +25,7 @@ const LOADING = "LOADING";
 const BEGIN = "BEGIN"
 
 //style for the survey paper
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   paper: {
 		position: 'absolute',
 		width: 500,
@@ -37,7 +37,7 @@ export default function Survey (props) {
 	const { submitSurveyUser, handleSurveyClose, submitSurveyAnon } = props;
 
 	const classes = useStyles();
-	let history = useHistory();
+	let navigate = useNavigate();
 
 	// state for navigation to profile
 	// const [profile, setProfile] = useState(false);
@@ -81,7 +81,7 @@ export default function Survey (props) {
 						console.log("WITHIN INDEX FRONT END",res)
 	
 						handleSurveyClose();
-						history.push("/profile");
+						navigate("/profile");
 					})
 					.catch((err) =>{
 						console.log(err);
@@ -98,7 +98,7 @@ export default function Survey (props) {
 						console.log("WITHIN INDEX FRONT END",res)
 	
 						handleSurveyClose();
-						history.push("/notLoggedIn");
+						navigate("/notLoggedIn");
 					})
 					.catch((err) =>{
 						console.log(err);
