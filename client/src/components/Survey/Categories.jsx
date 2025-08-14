@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Checkbox from '@mui/material/Checkbox';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     display: 'flex',
     marginTop: '-40px',

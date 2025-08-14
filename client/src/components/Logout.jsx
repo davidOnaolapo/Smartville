@@ -1,6 +1,6 @@
-import transitions from "@material-ui/core/styles/transitions";
+import transitions from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './Logout.scss'
 
 //mode for Nao
@@ -8,7 +8,7 @@ const LOGOUT = "LOGOUT"
 
 const Logout = (props) => {
 const { userName, setuserName, isloggedin, setIsloggedin, transitionNao } = props;
-let history = useHistory();
+let navigate = useNavigate();
 useEffect(() => {
     const isLocalStorage = localStorage.getItem("user_token");
     const userName = localStorage.getItem("user_name")
@@ -18,7 +18,7 @@ useEffect(() => {
 
 const clearStorage = (e) => {
   e.preventDefault()
-    history.push("/");
+    navigate("/");
     localStorage.clear();
     setIsloggedin(null);
 
