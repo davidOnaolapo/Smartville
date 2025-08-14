@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from '@material-ui/styles';
+import { styled } from '@mui/material';
 import clsx from 'clsx';
 
 import { checkForUser, formDataForHome } from "../../helpers/dataOrganisers"
@@ -8,122 +8,82 @@ import Warning from "./Warning";
 
 
 import Checkbox from './Checkbox'
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InfoIcon from '@material-ui/icons/Info';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Link from '@material-ui/core/Link';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InfoIcon from '@mui/icons-material/Info';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Link from '@mui/material/Link';
 
 import "./RecListItem.scss";
 
 const FLOW = "FLOW";
 const WARNING = "WARNING";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
-    width: 350,
-    backgroundColor: '#323949',
-    margin:'20px',
-    color:"white",
-    borderRadius:"8px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    minHeight:"615px"
+const StyledCard = styled(Card)(({ theme, inHome }) => ({
+  maxWidth: 345,
+  width: 350,
+  backgroundColor: inHome ? '#908e90' : '#323949',
+  margin: '20px',
+  color: inHome ? 'black' : 'white',
+  borderRadius: "8px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  minHeight: "615px"
+}));
+
+const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
+  height: 220,
+  margin: "5px 20px 20px 20px",
+  borderRadius: "2px",
+  backgroundSize: "contain",
+  backgroundColor: "#fff",
+}));
+
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  backgroundColor: '#535e79',
+}));
+
+const StyledInfoIcon = styled(IconButton)(({ theme, inHome }) => ({
+  marginLeft: '-10px',
+  color: inHome ? 'black' : 'white',
+  '&:hover': {
+    color: "#FBE889",
   },
-  rootInHome: {
-    maxWidth: 345,
-    width: 350,
-    backgroundColor: '#908e90',
-    margin:'20px',
-    color:"white",
-    borderRadius:"8px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    color:"black"
+}));
+
+const StyledDeleteIcon = styled(IconButton)(({ theme, inHome }) => ({
+  marginLeft: '-10px',
+  color: inHome ? 'black' : 'white',
+  '&:hover': {
+    color: "#DE9196",
   },
-  none: {
-    display: "none"
-  },
-  media: {
-    height: 220,
-    margin: "5px 20px 20px 20px",
-    borderRadius:"2px",
-    backgroundSize: "contain",
-    backgroundColor: "#fff",
-  },
-  avatar: {
-    backgroundColor: '#535e79',
-  },
-  infoIcon: {
-    marginLeft: '-10px',
-    color:"white",
-    '&:hover': {
-      color: "#FBE889",
-    },
-  },
-  deleteIcon: {
-    marginLeft: '-10px',
-    color:"white",
-    '&:hover': {
-      color: "#DE9196",
-    },
-  },
-  deleteIconHome: {
-    marginLeft: '-10px',
-    color:"black"
-  },
-  infoIconHome: {
-    marginLeft: '-10px',
-    color:"black"
-  },
-  cardHeader: {
-    fontSize:"1em",
-    fontWeight:'bold'
-  },
-  checkBox: {
-    marginTop:"2px"
-  },
-  price: {
-    marginLeft:"10px",
-    fontWeight:600
-  },
-  content: {
-    color:"white",
+}));
+
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  fontSize: "1em",
+  fontWeight: 'bold'
+}));
+
+const StyledCheckBox = styled('div')(({ theme }) => ({
+  marginTop: "2px"
+}));
+
+const StyledPrice = styled('div')(({ theme }) => ({
+  marginLeft: "10px",
+  fontWeight: 600
+}));
+
+const StyledContent = styled(CardContent)(({ theme }) => ({
+  color: "white",
     fontWeight:500,
     fontFamily: "Arial"
-  },
-  contentHome: {
-    color:"Black",
-    fontWeight:500,
-    fontFamily: "Arial"
-  },
-  quantity: {
-    color:"yellow",
-    marginLeft:"10px"
-  },
-  store: {
-    margin:"10px 0px 0px 20px",
-    color:"#b2ec5d"
-  },
-  stores: {
-    display:"flex",
-    justifyContent:"flex-start"
-  },
-  special: {
-    backgroundColor: "#fff",
-    borderRadius: "2px",
-    margin: "0px 16px",
-    paddingTop: "2px",
-  }
 }));
 
 function truncate(str, n) {
@@ -135,7 +95,7 @@ export default function RecListItem(props) {
   const { id, title, image, price, info, desc, avatar, stores,
           quantity, deleteRec, deleteProductHome, addProductHome } = props
 
-  const classes = useStyles();
+
   const [checkedProduct, setCheckedProduct] = useState(false);
   const [prodInHome, setProdInHome] = useState(false);
   const { mode, transition, back } = useVisualMode(FLOW)
@@ -172,76 +132,66 @@ export default function RecListItem(props) {
   }
 
   return (
-    <Card className={ clsx(
-        classes.root,
-        // classes.black,
-        {
-          [classes.black]: prodInHome,
-          [classes.rootInHome]: prodInHome
-        }
-    )}>
+    <StyledCard inHome={prodInHome}>
       { mode === FLOW &&
         <React.Fragment>
         <div>
-          <CardHeader
+          <StyledCardHeader
             avatar = {
-              <Avatar aria-label="recipe" className={classes.avatar}>
+              <StyledAvatar aria-label="recipe">
                 {avatar}
-              </Avatar>
+              </StyledAvatar>
             }
             action={
-              <Checkbox handleProdHome={handleProdHome} 
-                checkedProduct={checkedProduct}
-                user={user}
-              />
+              <StyledCheckBox>
+                <Checkbox handleProdHome={handleProdHome} 
+                  checkedProduct={checkedProduct}
+                  user={user}
+                />
+              </StyledCheckBox>
             }
             title={truncate(title, 57)}
-            classes={{
-              title: clsx(classes.cardHeader),
-              action: classes.checkBox
-            }}
           />
-          <div className={classes.stores}>
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
             {
               stores.map((store) =>{
-                return <a href={store.productLink} className={classes.store}>
+                return <a href={store.productLink} style={{ margin: "0px 5px", color: prodInHome ? 'black' : 'white' }}>
                   {store.name}
                 </a>
               })
             }
           </div>
-          <div className={classes.special}>
-            <CardMedia
-              className={classes.media}
+          <div style={{ backgroundColor: "#fff", borderRadius: "2px", margin: "0px 16px", paddingTop: "2px" }}>
+            <StyledCardMedia
               image={image}
               title={title}
             />
           </div>
-          <CardContent>
-            <div className= { prodInHome ? classes.contentHome : classes.content }>
+          <StyledContent>
+            <div style={{ color: prodInHome ? 'black' : 'white', fontWeight: 500, fontFamily: "Arial" }}>
               {
                 desc
               }
             </div>
-          </CardContent>
+          </StyledContent>
         </div>
         <div>
           <CardActions className="rec__actions">
             <div>
-              <div className={classes.price}>
+              <StyledPrice>
                 ${price/100}
                 {(quantity > 1) &&
-                  <span className={classes.quantity}>x{quantity}</span>
+                  <span style={{ marginLeft: "5px" }}>x{quantity}</span>
                 }
-              </div>
+              </StyledPrice>
             </div>
             <div>
-              <IconButton>
-                <InfoIcon className={ prodInHome ? classes.infoIconHome : classes.infoIcon }/>
-              </IconButton>
-              <IconButton className={clsx({[classes.none] : !user })}>
-                <DeleteIcon onClick={handleDeleteRec} className={ prodInHome ? classes.deleteIconHome : classes.deleteIcon }/>
-              </IconButton>
+              <StyledInfoIcon inHome={prodInHome}>
+                <InfoIcon />
+              </StyledInfoIcon>
+              <StyledDeleteIcon inHome={prodInHome} style={{ display: !user ? 'none' : 'block' }}>
+                <DeleteIcon onClick={handleDeleteRec} />
+              </StyledDeleteIcon>
             </div>
           </CardActions>
         </div>
@@ -253,6 +203,6 @@ export default function RecListItem(props) {
       { mode === WARNING &&
         <Warning deleteRewind={handleDeleteRewind} deleteConfirm={handleDeleteConfirm} />
       }
-    </Card>
+    </StyledCard>
   );
 }
