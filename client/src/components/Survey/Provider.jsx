@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
 //FOR PROVIDER
-import AppleIcon from '@material-ui/icons/Apple';
-import AndroidIcon from '@material-ui/icons/Android';
+import AppleIcon from '@mui/icons-material/Apple';
+import AndroidIcon from '@mui/icons-material/Android';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  margin: theme.spacing(1),
+  minWidth: 120,
+}));
+
+const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+  color: "white"
+}));
+
+const StyledSelect = styled(Select)(({ theme }) => ({
+  backgroundColor: "#e5e4e2",
+  '& .MuiSelect-select': {
+    backgroundColor: "#e5e4e2",
+    color: "black"
   },
-
-  android: {
-    marginBottom: '5px',
-    marginLeft:'4px'
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: "#e5e4e2"
   },
-
-  apple: {
-    marginBottom: '5px',
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: "#e5e4e2"
   },
-
-  providerNames: {
-    display:"flex", 
-    justifyContent:"center"
-  },
-
-  select: {
-    backgroundColor:"#e5e4e2"
-  },
-
-  inputLabel: {
-    color: "white"
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: "#e5e4e2"
   }
+}));
 
+const StyledProviderNames = styled('span')(({ theme }) => ({
+  display: "flex", 
+  justifyContent: "center"
+}));
+
+const StyledAndroidIcon = styled(AndroidIcon)(({ theme }) => ({
+  marginBottom: '5px',
+  marginLeft: '4px'
+}));
+
+const StyledAppleIcon = styled(AppleIcon)(({ theme }) => ({
+  marginBottom: '5px',
+}));
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  backgroundColor: "#e5e4e2",
+  color: "black",
+  '&:hover': {
+    backgroundColor: "#d4d3d1"
+  },
+  '&.Mui-selected': {
+    backgroundColor: "#c4c3c1"
+  }
 }));
 
 export default function Provider(props) {
-  const { provider, setProvider } = props
-
-  const classes = useStyles(); 
+  const { provider, setProvider } = props 
   const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
@@ -64,21 +83,20 @@ export default function Provider(props) {
   return(
 
 
-      <FormControl className={classes.formControl}>
-        <InputLabel className={classes.inputLabel}>Provider</InputLabel>
-        <Select
+      <StyledFormControl>
+        <StyledInputLabel>Provider</StyledInputLabel>
+        <StyledSelect
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
           value={provider}
           onChange={handleChange}
-          className={classes.select}
         >
-          <MenuItem value={"android"}><span className={classes.providerNames}>Android</span>{open&&<AndroidIcon className={classes.android}/>}</MenuItem>
-          <MenuItem value={"apple"}><span className={classes.providerNames}>Apple</span>{open&&<AppleIcon className={classes.apple}/>}</MenuItem>
-          <MenuItem value={"universal"}><span className={classes.providerNames}>Both</span></MenuItem>
-        </Select>
-      </FormControl>
+          <StyledMenuItem value={"android"}><StyledProviderNames>Android</StyledProviderNames>{open&&<StyledAndroidIcon/>}</StyledMenuItem>
+          <StyledMenuItem value={"apple"}><StyledProviderNames>Apple</StyledProviderNames>{open&&<StyledAppleIcon/>}</StyledMenuItem>
+          <StyledMenuItem value={"universal"}><StyledProviderNames>Both</StyledProviderNames></StyledMenuItem>
+        </StyledSelect>
+      </StyledFormControl>
 
     
   )

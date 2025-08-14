@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
+import { styled } from "@mui/material";
 
 import RoomCardList from "./RoomCardList";
 import './NotLoggedIn.scss';

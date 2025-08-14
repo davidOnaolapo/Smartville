@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 import Budget from './Budget';
 import Provider from './Provider';
@@ -12,10 +12,10 @@ import Loading from './Loading';
 import Error from './Error';
 import { setupCategories, setUpRooms, formDataForSurvey, checkForUser }  from '../../helpers/dataOrganisers'
 
-import transitions from '@material-ui/core/styles/transitions';
+import transitions from '@mui/material/styles';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   buttonRec: {
     color:"#00b7eb",
     marginTop:"10px",
