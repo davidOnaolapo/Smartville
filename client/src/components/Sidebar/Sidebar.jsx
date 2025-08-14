@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom"
 
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
 import "../Application.scss";
 import "./naoSpeaksApp.scss";
 
 import { naoSidebar } from "../../helpers/naoHelp"
 
-import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen';
-import FlashOnIcon from '@material-ui/icons/FlashOn';
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import AddToHomeScreenIcon from '@mui/icons-material/AddToHomeScreen';
+import FlashOnIcon from '@mui/icons-material/FlashOn';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import classNames from "classnames";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   link:{
     color:"white",
     textDecoration: 'none' 

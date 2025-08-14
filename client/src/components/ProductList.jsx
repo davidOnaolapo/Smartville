@@ -1,27 +1,24 @@
 import React from "react";
 import "./ProductList.scss";
 import ProductListItem from "./ProductListItem";
-import { makeStyles } from "@material-ui/core/styles";
-import transitions from "@material-ui/core/styles/transitions";
+import { styled } from "@mui/material/styles";
 
 const PRODUCTS = "PRODUCTS"
 
-const useStyles = makeStyles({
-  root: {
-    margin: "5px 5px 5px 18px",
-    fontSize: "30px",
-    fontStyle:"italic",
-    color: "#F5F5F5"
-  },
-  productsDiv: {
-    display: "flex",
-    flexWrap: "wrap",
-  }
+const StyledTitle = styled('h1')({
+  margin: "5px 5px 5px 18px",
+  fontSize: "30px",
+  fontStyle:"italic",
+  color: "#F5F5F5"
+});
+
+const StyledProductsDiv = styled('div')({
+  display: "flex",
+  flexWrap: "wrap",
 });
 
 const ProductList = (props) => {
   const { products, transitionNao } = props;
-  const classes = useStyles();
 
   const categoryArray = [
     { name: "Hubs", idArray: [1] },
@@ -50,9 +47,9 @@ const ProductList = (props) => {
         {categoryArray.map((category) => (
           <div>
             <div>
-             <h1 className={classes.root}>{category.name}</h1>
+             <StyledTitle>{category.name}</StyledTitle>
             </div>
-            <div className={classes.productsDiv}>
+            <StyledProductsDiv>
               {getCategoryProduct(category.idArray).map((product) => (
                 <ProductListItem
                   product_id={product.id}
@@ -62,7 +59,7 @@ const ProductList = (props) => {
                   product_price={product.price}
                 />
               ))}
-            </div>
+            </StyledProductsDiv>
           </div>
         ))}
 
